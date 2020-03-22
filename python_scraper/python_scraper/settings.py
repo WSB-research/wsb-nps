@@ -1,3 +1,13 @@
+# Django setup
+import sys
+sys.path.append('../api')
+
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'api.settings'
+
+import django
+django.setup()
+
 # -*- coding: utf-8 -*-
 
 # Scrapy settings for python_scraper project
@@ -19,7 +29,7 @@ NEWSPIDER_MODULE = 'python_scraper.spiders'
 #USER_AGENT = 'python_scraper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -27,9 +37,9 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 1
-# The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 1
+#DOWNLOAD_DELAY = 1
+# The download delay setting will honor only one of
+#CONCURRENT_REQUESTS_PER_DOMAIN = 1
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
@@ -49,13 +59,13 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'python_scraper.middlewares.NcsrSpiderMiddleware': 543,
+#    'python_scraper.middlewares.PythonScraperSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'python_scraper.middlewares.NcsrDownloaderMiddleware': 543,
+#    'python_scraper.middlewares.PythonScraperDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -66,9 +76,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'python_scraper.pipelines.NcsrPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'python_scraper.pipelines.PythonScraperPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

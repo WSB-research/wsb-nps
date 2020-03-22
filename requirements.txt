@@ -1,1 +1,5 @@
+django==3.0.4
+djangorestframework==3.11.0
+django-filter==2.2.0
 scrapy==2.0.0
+scrapy-djangoitem==1.1.1
