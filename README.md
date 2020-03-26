@@ -12,6 +12,8 @@ Run: `pip install -r requirements.txt`
 
 ### Running
 
+*Note: You will need to have the database setup by running `python manage.py migrate` from the api folder.*
+
 From the python_scraper folder run: `scrapy crawl sec_nport_p`
 
 ### Config Options
