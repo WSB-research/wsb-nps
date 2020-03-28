@@ -60,6 +60,12 @@ cp api/settings_local.py.sample api/settings_local.py
 export DJANGO_SETTINGS_MODULE=api.settings_local 
 ```
 
+To build the frontend, open a new terminal and run (to build for production you would run `yarn build`):
+```
+cd assets
+yarn watch
+```
+
 From the api folder:
 
 ```
@@ -67,4 +73,5 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Server is now running on `localhost:8000`, there is readable docs generated there.
+Server is now running on `localhost:8000`, the frontend is served at the root and there are readable docs for the api
+generated at /api/.
