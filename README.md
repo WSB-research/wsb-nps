@@ -2,11 +2,22 @@
 
 ## Setup
 
-I currently use Python 3.8.1 but I would imagine most Python versions would work.
+### Install:
 
-You will need to install pip: https://pip.pypa.io/en/stable/installing/
+- Python 3.8.1 https://www.python.org/downloads/release/python-381/
+- pip https://pip.pypa.io/en/stable/installing/
+- PostgreSQL 10.12 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+- pgAdmin4 https://www.postgresql.org/ftp/pgadmin/pgadmin4/v4.19/windows/
 
-Run: `pip install -r requirements.txt`
+### Setup PostgreSQL
+
+1. Launch pgAdmin4, navigate to the browser based UI (for me it was http://127.0.0.1:19217/browser/) 
+2. Connect to your local PostgreSQL server and create a new Login/User called `dev` with password `password`
+3. Create a Database called `NPS`, and set the owner to be the `dev` account you just created
+
+### Install Required Packages/Libraries
+
+- Run: `pip install -r requirements.txt` in the root of the project 
 
 ## Python Scraper 
 
@@ -25,11 +36,25 @@ settings.
 
 ### Running
 
-Currently just uses a sqlite database that is created when you first migrate. From the api folder:
+Currently uses the Postgres database setup earlier. 
+
+Make sure you have a `dbsettings.json` file created in the root api folder (right next to `manage.py`) with the following contents: 
+
+```
+{
+    "DB_NAME": "NPS",
+    "DB_USER": "dev",
+    "DB_PASSWORD": "password",
+    "DB_HOST": "localhost",
+    "DB_PORT": "5432"
+}
+```
+
+From the api folder:
 
 ```
 python manage.py migrate
 python manage.py runserver
 ```
 
-Server is now running on`localhost:8000`, there is readable docs generated there.
+Server is now running on `localhost:8000`, there is readable docs generated there.

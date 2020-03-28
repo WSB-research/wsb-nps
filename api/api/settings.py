@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -90,10 +91,16 @@ AUTHENTICATION_BACKENDS = []
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+dbsettings = json.loads(open(os.path.join(BASE_DIR, 'dbsettings.json')).read())
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': dbsettings['DB_NAME'],
+        'USER': dbsettings['DB_USER'],
+        'PASSWORD': dbsettings['DB_PASSWORD'],
+        'HOST': dbsettings['DB_HOST'],
+        'PORT': dbsettings['DB_PORT'],
     }
 }
 
