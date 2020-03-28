@@ -21,7 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', '$u#xelo4zaun&w4=q5fqu-)+xkra8eh6%1!s)!bgfblm+!dn5n')
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', '$u#xelo4zaun&w4=q5fqu-)+xkra8eh6%1!s)!bgfblm+!dn5n')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,11 +33,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'django.contrib.admin',
-    #'django.contrib.auth',
-    #'django.contrib.contenttypes',
-    #'django.contrib.sessions',
-    #'django.contrib.messages',
+    # 'django.contrib.admin',
+    # 'django.contrib.auth',
+    # 'django.contrib.contenttypes',
+    # 'django.contrib.sessions',
+    # 'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
@@ -44,13 +45,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    #'django.middleware.security.SecurityMiddleware',
-    #'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
+    # 'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # 'django.contrib.messages.middleware.MessageMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
 
@@ -76,8 +77,8 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                #'django.contrib.auth.context_processors.auth',
-                #'django.contrib.messages.context_processors.messages',
+                # 'django.contrib.auth.context_processors.auth',
+                # 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
@@ -90,17 +91,19 @@ AUTHENTICATION_BACKENDS = []
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-dbsettings = json.loads(open(os.path.join(BASE_DIR, 'dbsettings.json')).read())
+dbsettingspath = os.path.join(BASE_DIR, 'dbsettings.json')
+dbsettings = json.loads(open(dbsettingspath, 'a+').read())
+for k in dbsettings:
+    os.environ.setdefault(k, dbsettings[k])
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': dbsettings['DB_NAME'],
-        'USER': dbsettings['DB_USER'],
-        'PASSWORD': dbsettings['DB_PASSWORD'],
-        'HOST': dbsettings['DB_HOST'],
-        'PORT': dbsettings['DB_PORT'],
+        'NAME': os.environ.get('DB_NAME', dbsettings['DB_NAME']),
+        'USER': os.environ.get('DB_USER', dbsettings['DB_USER']),
+        'PASSWORD': os.environ.get('DB_PASSWORD', dbsettings['DB_PASSWORD']),
+        'HOST': os.environ.get('DB_HOST', dbsettings['DB_HOST']),
+        'PORT': os.environ.get('DB_PORT', dbsettings['DB_PORT']),
     }
 }
 
