@@ -88,7 +88,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
-AUTHENTICATION_BACKENDS = []
+AUTHENTICATION_BACKENDS = [] 
 
 
 # Database
