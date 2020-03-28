@@ -1,9 +1,13 @@
+from django.shortcuts import render
 from django_filters import rest_framework as filters
 from rest_framework import mixins, viewsets
 
-
 from company.models import *
 from company.serializers import *
+
+
+def index(request):
+    return render(request, 'index.html', {})
 
 
 class CompanyFilter(filters.FilterSet):
