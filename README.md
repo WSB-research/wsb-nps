@@ -52,6 +52,14 @@ Make sure you have a `dbsettings.json` file created in the root api folder (righ
 }
 ```
 
+You will need your own local settings file to overwrite some settings that are local specific. To use this run the 
+following from the api folder (you might want to put the export command in a bashrc/bash_profile or you will need
+to run it in every new terminal session):
+```
+cp api/settings_local.py.sample api/settings_local.py
+export DJANGO_SETTINGS_MODULE=api.settings_local 
+```
+
 From the api folder:
 
 ```
