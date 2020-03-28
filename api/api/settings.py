@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import json
+import dj_database_url
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -91,10 +93,10 @@ AUTHENTICATION_BACKENDS = []
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
 dbsettingspath = os.path.join(BASE_DIR, 'dbsettings.json')
-dbsettings = json.loads(open(dbsettingspath, 'a+').read())
-for k in dbsettings:
-    os.environ.setdefault(k, dbsettings[k])
+if os.path.exists(dbsettingspath):
+    dbsettings = json.loads(open(dbsettingspath, 'r').read())
 
 DATABASES = {
     'default': {
@@ -106,6 +108,10 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT', dbsettings['DB_PORT']),
     }
 }
+
+
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
 
 
 # Password validation
