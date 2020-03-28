@@ -1,2 +1,4 @@
 db.sqlite3
 **/dbsettings.json
+api/settings_local.py
+dist/

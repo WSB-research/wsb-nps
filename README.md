@@ -52,6 +52,20 @@ Make sure you have a `dbsettings.json` file created in the root api folder (righ
 }
 ```
 
+You will need your own local settings file to overwrite some settings that are local specific. To use this run the 
+following from the api folder (you might want to put the export command in a bashrc/bash_profile or you will need
+to run it in every new terminal session):
+```
+cp api/settings_local.py.sample api/settings_local.py
+export DJANGO_SETTINGS_MODULE=api.settings_local 
+```
+
+To build the frontend, open a new terminal and run (to build for production you would run `yarn build`):
+```
+cd assets
+yarn watch
+```
+
 From the api folder:
 
 ```
@@ -59,4 +73,5 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Server is now running on `localhost:8000`, there is readable docs generated there.
+Server is now running on `localhost:8000`, the frontend is served at the root and there are readable docs for the api
+generated at /api/.

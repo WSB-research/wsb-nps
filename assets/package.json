@@ -1,0 +1,31 @@
+{
+  "name": "wsb-nps",
+  "version": "1.0.0",
+  "description": "Frontend for NPORT data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "parcel watch *.html --out-dir ../api/dist/bundle --public-url /static/bundle",
+    "build": "parcel build *.html --out-dir ../api/dist/bundle --public-url /static/bundle"
+  },
+  "alias": {
+    "sass": "../sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WSB-research/wsb-nps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WSB-research/wsb-nps/issues"
+  },
+  "homepage": "https://github.com/WSB-research/wsb-nps#readme",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "sass": "^1.26.3",
+    "scss": "^0.2.4"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
