@@ -93,13 +93,16 @@ AUTHENTICATION_BACKENDS = []
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+DATABASES = {'default': {}}
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(
+        default=os.environ['DATABASE_URL'])
+
 
 dbsettingspath = os.path.join(BASE_DIR, 'dbsettings.json')
 if os.path.exists(dbsettingspath):
-    dbsettings = json.loads(open(dbsettingspath, 'r').read())
-
-DATABASES = {
-    'default': {
+    dbsettings = json.loads(open(dbsettingspath).read())
+    DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', dbsettings['DB_NAME']),
         'USER': os.environ.get('DB_USER', dbsettings['DB_USER']),
@@ -107,11 +110,8 @@ DATABASES = {
         'HOST': os.environ.get('DB_HOST', dbsettings['DB_HOST']),
         'PORT': os.environ.get('DB_PORT', dbsettings['DB_PORT']),
     }
-}
 
 
-if os.environ.get('DATABASE_URL'):
-    DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
 
 
 # Password validation
